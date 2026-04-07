@@ -1,0 +1,32 @@
+export function VietnamFlagIcon({ className = "" }) {
+  return (
+    <svg
+      width="25px"
+      height="24px"
+      viewBox="0 0 25 24"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <g clip-path="url(#clip0_5935_101787)">
+        <path
+          d="M12.632 24.0076C19.2594 24.0076 24.632 18.635 24.632 12.0076C24.632 5.38015 19.2594 0.00756836 12.632 0.00756836C6.00454 0.00756836 0.631958 5.38015 0.631958 12.0076C0.631958 18.635 6.00454 24.0076 12.632 24.0076Z"
+          fill="#DA251C"
+        ></path>
+        <path
+          d="M12.632 14.6076L16.7157 17.4076L15.1895 12.8476L19.232 9.88759H14.1995L12.632 5.40759L11.1057 9.88759H6.03195L10.0745 12.8476L8.5482 17.4076L12.632 14.6076Z"
+          fill="#FFFF01"
+        ></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_5935_101787">
+          <rect
+            width="24"
+            height="24"
+            fill="white"
+            transform="translate(0.631958 0.00756836)"
+          ></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}

@@ -23,14 +23,13 @@ export async function POST(req: Request) {
       data: {
         email,
         name,
-        password: hashedPassword
+        password: hashedPassword,
       },
     });
 
-    return NextResponse.json({
-      message: "Register success",
-      user,
-    });
+    const { password: pass, ...res } = user;
+
+    return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }

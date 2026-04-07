@@ -19,12 +19,13 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z
   .object({
     name: z.string().min(2, "Name phải nhiều hơn 2 ký tự"),
     email: z.email("Email không hợp lệ"),
-    password: z.string().min(8, "Password >= 8 ký tự"),
+    password: z.string().min(6, "Mật khẩu >= 6 ký tự"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -43,7 +44,22 @@ export default function Page() {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        password: data.password
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      toast("Đăng ký tài khoản thành công");
+    })
+    .catch(err => {})
   };
 
   return (
@@ -107,7 +123,7 @@ export default function Page() {
                     </p>
                   )}
                   <FieldDescription>
-                    Must be at least 8 characters long.
+                    Must be at least 6 characters long.
                   </FieldDescription>
                 </Field>
                 <Field>
