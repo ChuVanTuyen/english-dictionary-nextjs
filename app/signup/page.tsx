@@ -57,7 +57,9 @@ export default function Page() {
     })
     .then(res => res.json())
     .then(data => {
-      toast("Đăng ký tài khoản thành công");
+      toast("Đăng ký tài khoản thành công", {
+        position: "top-right"
+      });
     })
     .catch(err => {})
   };

@@ -1,3 +1,5 @@
+"use client";
+
 import { EmailIcon } from "@/components/icons/EmailIcon";
 import { LockIcon } from "@/components/icons/LockIcon";
 import { Button } from "@/components/ui/button";
@@ -15,21 +17,44 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  email: z.email("Email không hợp lệ"),
+  password: z.string().min(6, "Mật khẩu >= 6 ký tự"),
+});
+type FormData = z.infer<typeof formSchema>;
 
 export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    
+  }
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="flex flex-col gap-6 w-full max-w-sm">
         <Card className="border-none">
           <CardHeader>
-            <CardTitle className="font-bold text-xl text-(--text-brand-primary)">Đăng nhập</CardTitle>
+            <CardTitle className="font-bold text-xl text-(--text-brand-primary)">
+              Đăng nhập
+            </CardTitle>
             <CardDescription>
               Nhập email của bạn bên dưới để đăng nhập vào tài khoản
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <FieldGroup>
                 <Field>
                   <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -41,6 +66,7 @@ export default function Page() {
                       placeholder="m@example.com"
                       className="outline-none h-9.5 w-full"
                       required
+                      {...register("email")}
                     />
                   </InputGroup>
                 </Field>
@@ -62,11 +88,17 @@ export default function Page() {
                       placeholder="Mật khẩu"
                       className="outline-none h-9.5 w-full"
                       required
+                      {...register("password")}
                     />
                   </InputGroup>
                 </Field>
                 <Field>
-                  <Button className="cursor-pointer h-10 bg-(--surface-brand-primary)" type="submit">Login</Button>
+                  <Button
+                    className="cursor-pointer h-10 bg-(--surface-brand-primary)"
+                    type="submit"
+                  >
+                    Login
+                  </Button>
                   <FieldDescription className="text-center">
                     Don&apos;t have an account?{" "}
                     <Link href="/signup">Sign up</Link>

@@ -1,17 +1,25 @@
 "use client";
 
+import { cn, getLocalStore, setLocalStore } from "@/lib/utils";
 import { Nunito } from "next/font/google";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DictionaryIcon } from "./icons/DictionaryIcon";
+import { DocumentIcon } from "./icons/DocumentIcon";
 import { ExamIcon } from "./icons/ExamIcon";
 import { NotebookIcon } from "./icons/NotebookIcon";
 import { PracticeIcon } from "./icons/PracticeIcon";
-import { DocumentIcon } from "./icons/DocumentIcon";
-import { VietnamFlagIcon } from "./icons/VietnamFlagIcon";
 import { SettingIcon } from "./icons/SettingIcon";
+import { VietnamFlagIcon } from "./icons/VietnamFlagIcon";
 import { Button } from "./ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Switch } from "./ui/switch";
+import { useEffect, useState } from "react";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -29,6 +37,24 @@ export default function Header() {
   ];
 
   const pathname = usePathname();
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const darkMode = getLocalStore("darkMode");
+    setDarkMode(darkMode);
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+
+    if (darkMode) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+
+    setLocalStore("darkMode", darkMode);
+  }, [darkMode]);
 
   return (
     <header className="container mx-auto pt-4">
@@ -72,7 +98,24 @@ export default function Header() {
           <div className="p-2 rounded-lg flex gap-2 bg-(--surface-neutral-primary) mr-4">
             <VietnamFlagIcon />
             <hr className="h-6 border-r-(--border-secondary) border-r border-solid" />
-            <SettingIcon />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div>
+                  <SettingIcon />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-max">
+                <DropdownMenuItem>
+                  Chế độ ban đêm
+                  <Switch
+                    checked={darkMode}
+                    onCheckedChange={setDarkMode}
+                    onClick={(e) => e.stopPropagation()}
+                    id="switch-focus-mode"
+                  />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <Link href="/login" className="mr-3">
             <Button className="cursor-pointer! rounded-full h-9.5 bg-(--surface-brand-primary)">
