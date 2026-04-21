@@ -1,16 +1,12 @@
-import { ArrowLeftIcon } from "@/components/icons/ArrowLeftIcon";
-import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
-import { MicroIcon } from "@/components/icons/MicroIcon";
-import { PencilIcon } from "@/components/icons/PencilIcon";
-import { PieceIcon } from "@/components/icons/PieceIcon";
-import { SearchIcon } from "@/components/icons/SearchIcon";
-import { TipIcon } from "@/components/icons/TipIcon";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon.svg";
+import TipIcon from "@/components/icons/TipIcon.svg";
 import { RankingFeedback } from "@/components/home/RankingFeedback";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ListWordSidebar } from "@/components/home/ListWordSidebar";
+import { Search } from "@/components/search";
+import ArrowLeftIcon from "@/components/icons/ArrowLeftIcon.svg";
 
 export default function Home() {
   const hots = [
@@ -26,16 +22,7 @@ export default function Home() {
 
   return (
     <div>
-      <label className="h-16 w-[95vw] max-w-237 flex items-center bg-(--surface-default-inverse) mx-auto rounded-full mt-9 px-5 focus-within:outline focus-within:outline-(--primary-60-color)">
-        <SearchIcon />
-        <input
-          className="flex-1 h-full pl-2 outline-none text-lg"
-          type="text"
-        />
-        <MicroIcon className="mr-4" />
-        <PencilIcon className="mr-4" />
-        <PieceIcon />
-      </label>
+      <Search />
 
       <div className="grid grid-cols-7 container mx-auto gap-3 mt-6">
         <div className="col-span-2">
@@ -59,7 +46,7 @@ export default function Home() {
             </CardContent>
             <ButtonGroup className="absolute bottom-4 left-4">
               <Button variant="outline" className="cursor-pointer">
-                <ArrowLeftIcon />
+                <ArrowLeftIcon className="w-4 h-4 text-(--text-brand-primary)" />
               </Button>
               <Button variant="outline" className="cursor-pointer">
                 <ArrowRightIcon />

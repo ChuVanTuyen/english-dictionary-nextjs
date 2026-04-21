@@ -13,15 +13,79 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
+  id          Int       @id @default(autoincrement())
+  email       String    @unique(map: "User_email_key")
   name        String
   password    String
   avatar      String?
   gender      String?
-  phoneNumber String?  @unique
+  phoneNumber String?   @unique(map: "User_phoneNumber_key")
   address     String?
   birthDate   DateTime?
   createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  updatedAt   DateTime  @default(now())
+}
+
+model Word {
+  id         Int           @id @default(autoincrement())
+  word       String        @unique @db.VarChar(255)
+  pronounce  String?       @db.VarChar(255)
+  synonyms   Synonym[]
+  antonyms   Antonym[]
+  contents   ContentWord[]
+  @@map("words")
+}
+
+model Synonym {
+  id       Int    @id @default(autoincrement())
+  synonym  String @db.VarChar(255)
+  word_id  Int
+  word     Word   @relation(fields: [word_id], references: [id], onDelete: Cascade)
+  @@map("synonyms")
+}
+
+model Antonym {
+  id       Int    @id @default(autoincrement())
+  antonym  String @db.VarChar(255)
+  word_id  Int
+  word     Word   @relation(fields: [word_id], references: [id], onDelete: Cascade)
+  @@map("antonyms")
+}
+
+model ContentWord {
+  id               Int           @id @default(autoincrement())
+  kind             String        @db.VarChar(100)
+  word_id          Int
+  word             Word          @relation(fields: [word_id], references: [id], onDelete: Cascade)
+  kind_content_id  Int
+  kindContents     KindContent[]
+  idioms           Idiom[]
+  @@map("content_words")
+}
+
+model KindContent {
+  id               Int        @id @default(autoincrement())
+  means            String     @db.Text
+  content_word_id  Int
+  contentWord      ContentWord @relation(fields: [content_word_id], references: [id], onDelete: Cascade)
+  examples         Example[]
+  @@map("kind_contents")
+}
+
+model Example {
+  id               Int         @id @default(autoincrement())
+  example          String      @db.Text
+  mean             String      @db.Text
+  kind_content_id  Int
+  kindContent      KindContent @relation(fields: [kind_content_id], references: [id], onDelete: Cascade)
+  @@map("examples")
+}
+
+model Idiom {
+  id               Int          @id @default(autoincrement())
+  idiom            String       @db.Text
+  mean             String       @db.Text
+  content_word_id  Int
+  contentWord      ContentWord  @relation(fields: [content_word_id], references: [id], onDelete: Cascade)
+  @@map("idioms")
 }

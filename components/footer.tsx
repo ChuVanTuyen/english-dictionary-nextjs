@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { Card } from "./ui/card";
 import { Nunito } from "next/font/google";
+import CHplayIcon from "@/components/icons/CHplayIcon.svg";
+import AppStoreIcon from "@/components/icons/AppStoreIcon.svg";
+import ExtensionIcon from "@/components/icons/ExtensionIcon.svg";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -140,26 +143,31 @@ export function Footer() {
     <footer className="mt-12 pb-12">
       <Card className="ring-0 p-4 grid grid-cols-4 container mx-auto">
         <div>
-          <h3
-            className={
-              nunito.variable +
-              ` font-(family-name:--font-nunito) font-extrabold text-3xl`
-            }
-          >
-            Eng
-          </h3>
-          <div className="text-lg text-(--text-small-secondary)">
-            Từ điển Anh - Việt
+          <div className="flex items-center gap-3">
+            <img className="w-14 h-14" src="/images/logo.png" alt="Logo" />
+            <div>
+              <h3
+                className={
+                  nunito.variable +
+                  ` font-(family-name:--font-nunito) font-extrabold text-3xl`
+                }
+              >
+                Eng
+              </h3>
+              <div className="text-lg text-(--text-small-secondary) leading-5">
+                Từ điển Anh - Việt
+              </div>
+            </div>
           </div>
           <h3 className="mt-4 font-semibold text-lg">Thông tin</h3>
           {information.map((item) => (
-            <FooterLink title={item.title} url={item.url} />
+            <FooterLink key={item.title} title={item.title} url={item.url} />
           ))}
         </div>
         <div>
           <h3 className="mt-4 font-semibold text-lg">Chính sách giao dịch</h3>
           {terms.map((item) => (
-            <FooterLink title={item.title} url={item.url} />
+            <FooterLink key={item.title} title={item.title} url={item.url} />
           ))}
         </div>
         <div>
@@ -195,6 +203,15 @@ export function Footer() {
         </div>
         <div>
           <h3 className="mt-4 font-semibold text-lg">Tải ngay</h3>
+          <Link className="mt-3 block" href="/">
+            <CHplayIcon className="w-40.5 h-12" />
+          </Link>
+          <Link className="mt-3 block" href="/">
+            <AppStoreIcon className="w-40.5 h-12" />
+          </Link>
+          <Link className="mt-3 block" href="/">
+            <ExtensionIcon className="w-40.5 h-12" />
+          </Link>
         </div>
       </Card>
     </footer>

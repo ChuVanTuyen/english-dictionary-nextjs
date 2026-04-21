@@ -1,7 +1,7 @@
 "use client";
 
-import { EmailIcon } from "@/components/icons/EmailIcon";
-import { LockIcon } from "@/components/icons/LockIcon";
+import { EmailIcon } from "@/components@/components/icons/EmailIcon";
+import { LockIcon } from "@/components@/components/icons/LockIcon";
 import { Button } from "@/components/ui/button";
 import {
   Card,

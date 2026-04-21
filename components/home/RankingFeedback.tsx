@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { DislikeIcon } from "../icons/DislikeIcon";
-import { LikeIcon } from "../icons/LikeIcon";
+import DislikeIcon from "@/components/icons/DislikeIcon.svg";
+import LikeIcon from "@/components/icons/LikeIcon.svg";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {

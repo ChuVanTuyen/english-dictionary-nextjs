@@ -14,7 +14,8 @@ export function ListWordSidebar({ title, data, className }: ListWordSideType) {
       <CardTitle>{title}</CardTitle>
       <div className="flex flex-wrap gap-2">
         {data.map((item) => (
-          <Badge
+          <Badge 
+            key={item}
             variant="secondary"
             className="cursor-pointer text-base font-normal h-8 px-2 inline-block"
           >

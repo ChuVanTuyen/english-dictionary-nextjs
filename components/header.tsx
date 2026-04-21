@@ -4,13 +4,13 @@ import { cn, getLocalStore, setLocalStore } from "@/lib/utils";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DictionaryIcon } from "./icons/DictionaryIcon";
-import { DocumentIcon } from "./icons/DocumentIcon";
-import { ExamIcon } from "./icons/ExamIcon";
-import { NotebookIcon } from "./icons/NotebookIcon";
-import { PracticeIcon } from "./icons/PracticeIcon";
-import { SettingIcon } from "./icons/SettingIcon";
-import { VietnamFlagIcon } from "./icons/VietnamFlagIcon";
+import DictionaryIcon from "@/components/icons/DictionaryIcon.svg";
+import DocumentIcon from "@/components/icons/DocumentIcon.svg";
+import ExamIcon from "@/components/icons/ExamIcon.svg";
+import NotebookIcon from "@/components/icons/NotebookIcon.svg";
+import PracticeIcon from "@/components/icons/PracticeIcon.svg";
+import SettingIcon from "@/components/icons/SettingIcon.svg";
+import VietnamFlagIcon from "@/components/icons/VietnamFlagIcon.svg";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
