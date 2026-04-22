@@ -4,13 +4,6 @@ import { cn, getLocalStore, setLocalStore } from "@/lib/utils";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import DictionaryIcon from "@/components/icons/DictionaryIcon.svg";
-import DocumentIcon from "@/components/icons/DocumentIcon.svg";
-import ExamIcon from "@/components/icons/ExamIcon.svg";
-import NotebookIcon from "@/components/icons/NotebookIcon.svg";
-import PracticeIcon from "@/components/icons/PracticeIcon.svg";
-import SettingIcon from "@/components/icons/SettingIcon.svg";
-import VietnamFlagIcon from "@/components/icons/VietnamFlagIcon.svg";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -20,6 +13,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Switch } from "./ui/switch";
 import { useEffect, useState } from "react";
+import { DictionaryIcon, DocumentIcon, ExamIcon, NotebookIcon, PracticeIcon, SettingIcon, VietnamFlagIcon } from "./icons";
 
 const nunito = Nunito({
   subsets: ["latin"],

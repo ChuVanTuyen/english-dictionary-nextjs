@@ -4,8 +4,8 @@ import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Word } from "./type";
-import SpeakerIcon from "@/components/icons/SpeakerIcon.svg";
-import BookmarkIcon from "@/components/icons/BookmarkIcon.svg";
+import { SearchBar } from "@/components/SearchBar";
+import { BookmarkIcon, SpeakerIcon } from "@/components/icons";
 
 export default function Search() {
   const query = useSearchParams().get("query")?.trim() || "";
@@ -33,9 +33,9 @@ export default function Search() {
   };
 
   return (
-    <div className="grid grid-cols-12 container mx-auto gap-4 mt-10">ok
+    <div className="grid grid-cols-12 container mx-auto gap-4 mt-10">
       <div className="col-span-12">
-        <Search />
+        <SearchBar />
       </div>
       <div className="col-span-3">
         <div className="flex flex-col gap-3">

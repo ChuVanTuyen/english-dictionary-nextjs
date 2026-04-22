@@ -1,27 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
-import MicroIcon from "@/components/icons/MicroIcon.svg";
-import PencilIcon from "@/components/icons/PencilIcon.svg";
-import PieceIcon from "@/components/icons/PieceIcon.svg";
-import SearchIcon from "@/components/icons/SearchIcon.svg";
-import useRouter from "next/navigation";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { MicroIcon, PencilIcon, PieceIcon, SearchIcon } from "./icons";
 
 interface SuggestWord {
   word: string;
   pronounce: string;
-  content: [
-    {
-      kind: string;
-      kind_content: {
-        means: string;
-      }[];
-    },
-  ];
+  content: {
+    kind: string;
+    kind_content: {
+      means: string;
+    }[];
+  }[];
 }
 
-export function Search() {
-  // const router = useRouter();
+export function SearchBar() {
+  const router = useRouter();
   const [query, setQuery] = useState("");
+  const [isShowSuggest, setIsShowSuggest] = useState(false);
   const [debounced, setDebounced] = useState(query);
   const [suggestions, setSuggestions] = useState<SuggestWord[]>([]);
 
@@ -37,7 +34,7 @@ export function Search() {
       setSuggestions([]);
       return;
     }
-
+    setIsShowSuggest(true);
     fetch(`/api/dictionary/suggest?q=${debounced}&limit=10`)
       .then((res) => res.json())
       .then(setSuggestions);
@@ -45,7 +42,8 @@ export function Search() {
 
   const confirmSearch = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      // router.push(`/search?query=${encodeURIComponent(query)}`);
+      router.push(`/search?query=${encodeURIComponent(query)}`);
+      setIsShowSuggest(false);
     }
   };
 
@@ -59,16 +57,19 @@ export function Search() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => confirmSearch(e)}
+          onBlur={() => setTimeout(() => setIsShowSuggest(false), 100)}
+          onFocus={() => suggestions.length && setIsShowSuggest(true)}
         />
         <MicroIcon className="mr-4" />
         <PencilIcon className="mr-4" />
         <PieceIcon />
       </label>
-      {/* {suggestions?.length > 0 && (
+      {suggestions?.length > 0 && isShowSuggest && (
         <div className="shadow-[0_8px_8px_4px_#00000014] bg-(--surface-default-inverse) top-8 z-1 absolute w-full rounded-b-[24px]">
           <div className="mt-12 mx-4 mb-4 overflow-auto max-h-125">
             {suggestions.map((suggestion) => (
               <Link
+                onClick={() => setIsShowSuggest(false)}
                 key={suggestion.word}
                 href={`/search?query=${encodeURIComponent(suggestion.word)}`}
                 className="block p-4 hover:bg-(--surface-neutral-primary)"
@@ -86,7 +87,7 @@ export function Search() {
             ))}
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

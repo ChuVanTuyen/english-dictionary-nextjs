@@ -1,6 +1,4 @@
 import { cn } from "@/lib/utils";
-import DislikeIcon from "@/components/icons/DislikeIcon.svg";
-import LikeIcon from "@/components/icons/LikeIcon.svg";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
@@ -11,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { DislikeIcon, LikeIcon } from "../icons";
 
 export function RankingFeedback() {
   return (

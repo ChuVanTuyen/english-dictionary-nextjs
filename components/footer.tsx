@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { Card } from "./ui/card";
 import { Nunito } from "next/font/google";
-import CHplayIcon from "@/components/icons/CHplayIcon.svg";
-import AppStoreIcon from "@/components/icons/AppStoreIcon.svg";
-import ExtensionIcon from "@/components/icons/ExtensionIcon.svg";
+import { AppStoreIcon, CHplayIcon, ExtensionIcon } from "./icons";
 
 const nunito = Nunito({
   subsets: ["latin"],

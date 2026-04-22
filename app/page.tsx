@@ -1,12 +1,10 @@
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon.svg";
-import TipIcon from "@/components/icons/TipIcon.svg";
 import { RankingFeedback } from "@/components/home/RankingFeedback";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ListWordSidebar } from "@/components/home/ListWordSidebar";
-import { Search } from "@/components/search";
-import ArrowLeftIcon from "@/components/icons/ArrowLeftIcon.svg";
+import { SearchBar } from "@/components/SearchBar";
+import { ArrowLeftIcon, ArrowRightIcon, TipIcon } from "@/components/icons";
 
 export default function Home() {
   const hots = [
@@ -22,8 +20,7 @@ export default function Home() {
 
   return (
     <div>
-      <Search />
-
+      <SearchBar />
       <div className="grid grid-cols-7 container mx-auto gap-3 mt-6">
         <div className="col-span-2">
           <ListWordSidebar data={hots} title="Từ khóa hót" />
@@ -46,7 +43,7 @@ export default function Home() {
             </CardContent>
             <ButtonGroup className="absolute bottom-4 left-4">
               <Button variant="outline" className="cursor-pointer">
-                <ArrowLeftIcon className="w-4 h-4 text-(--text-brand-primary)" />
+                <ArrowLeftIcon className="w-4 h-4" />
               </Button>
               <Button variant="outline" className="cursor-pointer">
                 <ArrowRightIcon />
