@@ -13,7 +13,16 @@ import {
 } from "./ui/dropdown-menu";
 import { Switch } from "./ui/switch";
 import { useEffect, useState } from "react";
-import { DictionaryIcon, DocumentIcon, ExamIcon, NotebookIcon, PracticeIcon, SettingIcon, VietnamFlagIcon } from "./icons";
+import {
+  DictionaryIcon,
+  DocumentIcon,
+  ExamIcon,
+  NotebookIcon,
+  PracticeIcon,
+  SettingIcon,
+  VietnamFlagIcon,
+} from "./icons";
+import Image from "next/image";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -57,7 +66,7 @@ export default function Header() {
           href="/"
           className="flex items-center text-[28px] font-bold gap-2"
         >
-          <img className="w-10 h-10" src="/images/logo.png" alt="Logo" />
+          <Image width={40} height={40} src="/images/logo.png" alt="Logo" />
           <span
             className={nunito.variable + ` font-(family-name:--font-nunito)`}
           >

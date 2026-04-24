@@ -24,6 +24,11 @@ import SpeakerIcon from "./list/SpeakerIcon.svg";
 import TipIcon from "./list/TipIcon.svg";
 import TranslateIcon from "./list/TranslateIcon.svg";
 import VietnamFlagIcon from "./list/VietnamFlagIcon.svg";
+import PlayFill from "./list/PlayFill.svg";
+import BarChartIcon from "./list/BarChartIcon.svg";
+import BarRoundChartIcon from "./list/BarRoundChartIcon.svg";
+import Panda1Icon from "./list/Panda1Icon.svg";
+import AddIcon from "./list/AddIcon.svg";
 
 export {
   AppStoreIcon,
@@ -52,4 +57,9 @@ export {
   TipIcon,
   TranslateIcon,
   VietnamFlagIcon,
+  PlayFill,
+  BarChartIcon,
+  BarRoundChartIcon,
+  Panda1Icon,
+  AddIcon
 };

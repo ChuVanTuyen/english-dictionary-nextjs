@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card } from "./ui/card";
 import { Nunito } from "next/font/google";
 import { AppStoreIcon, CHplayIcon, ExtensionIcon } from "./icons";
+import Image from "next/image";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -142,7 +143,7 @@ export function Footer() {
       <Card className="ring-0 p-4 grid grid-cols-4 container mx-auto">
         <div>
           <div className="flex items-center gap-3">
-            <img className="w-14 h-14" src="/images/logo.png" alt="Logo" />
+            <Image width={56} height={56} src="/images/logo.png" alt="Logo" />
             <div>
               <h3
                 className={
@@ -175,7 +176,7 @@ export function Footer() {
           <div className="flex items-center gap-3 mt-3">
             {socials.map((social) => (
               <Link key={social.title} href={social.url}>
-                <img className="w-8" src={social.image} alt={social.title} />
+                <Image width={32} height={32} src={social.image} alt={social.title} />
               </Link>
             ))}
           </div>
@@ -183,18 +184,14 @@ export function Footer() {
           <div className="flex items-center gap-3 mt-3">
             {appDictionarys.map((social) => (
               <Link key={social.title} href={social.url}>
-                <img
-                  className="w-8 rounded"
-                  src={social.image}
-                  alt={social.title}
-                />
+                <Image width={32} height={32} className="rounded" src={social.image} alt={social.title} />
               </Link>
             ))}
           </div>
           <div className="flex items-center gap-3 mt-3">
             {appTodaiis.map((social) => (
               <Link key={social.title} href={social.url}>
-                <img className="w-8" src={social.image} alt={social.title} />
+                <Image width={32} height={32} src={social.image} alt={social.title} />
               </Link>
             ))}
           </div>
