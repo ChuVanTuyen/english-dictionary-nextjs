@@ -32,7 +32,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       message: "Login success",
-      token,
+      data: {
+        user,
+        token
+      },
     });
   } catch (error) {
     console.log(error);

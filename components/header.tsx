@@ -23,6 +23,8 @@ import {
   VietnamFlagIcon,
 } from "./icons";
 import Image from "next/image";
+import { useUserStore } from "@/lib/stores/userStore";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -41,6 +43,7 @@ export default function Header() {
 
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const darkMode = getLocalStore("darkMode");
@@ -120,19 +123,34 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <Link href="/login" className="mr-3">
-            <Button className="cursor-pointer! rounded-full h-9.5 bg-(--surface-brand-primary)">
-              Đăng nhập
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button
-              className="rounded-full h-9.5 cursor-pointer!"
-              variant="ghost"
-            >
-              Đăng ký
-            </Button>
-          </Link>
+          {user ? (
+            <div>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                  className="grayscale"
+                />
+                <AvatarFallback>VN</AvatarFallback>
+              </Avatar>
+            </div>
+          ) : (
+            <>
+              <Link href="/login" className="mr-3">
+                <Button className="cursor-pointer! rounded-full h-9.5 bg-(--surface-brand-primary)">
+                  Đăng nhập
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button
+                  className="rounded-full h-9.5 cursor-pointer!"
+                  variant="ghost"
+                >
+                  Đăng ký
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/header";
-import { GeneralProvider } from "@/components/providers/GeneralContextProvider";
 import { Footer } from "@/components/footer";
 
 const inter = Inter({
@@ -42,12 +41,10 @@ export default function RootLayout({
       `}
     >
       <body className="min-h-full flex flex-col bg-(--surface-background)">
-        <GeneralProvider>
-          <Header />
-          <main>{children}</main>
-          <Toaster />
-          <Footer />
-        </GeneralProvider>
+        <Header />
+        <main>{children}</main>
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );

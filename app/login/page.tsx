@@ -1,6 +1,6 @@
 "use client";
 
-import { EmailIcon, LockIcon } from "@/components/icons";
+import { EmailIcon, InfoCircle, LockIcon, TickCircleSuccessIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,9 +16,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
+import { useUserStore } from "@/lib/stores/userStore";
+import { setLocalStore } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -28,6 +31,8 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function Page() {
+  const setUser = useUserStore((state) => state.setUser);
+
   const {
     register,
     handleSubmit,
@@ -37,13 +42,44 @@ export default function Page() {
   });
 
   const onSubmit = (data: FormData) => {
-    
-  }
+    fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message || "Login failed");
+        }
+        return data;
+      })
+      .then((res) => {
+        toast.success("Đăng nhập thành công", {
+          position: "top-right",
+          icon: <TickCircleSuccessIcon />
+        });
+        setUser(res.data.user);
+        setLocalStore('inforUser', res.data.user);
+        setLocalStore('token', res.data.token);
+      })
+      .catch((err) => {
+        toast.error("Tài khoản hoặc mật khẩu không chính xác", {
+          position: "top-right",
+          icon: <InfoCircle className="text-(--surface-error-primary)" />
+        });
+      });
+  };
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+    <div className="flex w-full items-center justify-center p-6 md:p-10">
       <div className="flex flex-col gap-6 w-full max-w-sm">
-        <Card className="border-none">
+        <Card className="ring-0">
           <CardHeader>
             <CardTitle className="font-bold text-xl text-(--text-brand-primary)">
               Đăng nhập

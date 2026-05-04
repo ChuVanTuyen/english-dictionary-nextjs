@@ -29,6 +29,7 @@ import BarChartIcon from "./list/BarChartIcon.svg";
 import BarRoundChartIcon from "./list/BarRoundChartIcon.svg";
 import Panda1Icon from "./list/Panda1Icon.svg";
 import AddIcon from "./list/AddIcon.svg";
+import TickCircleSuccessIcon from "./list/TickCircleSuccessIcon.svg";
 
 export {
   AppStoreIcon,
@@ -61,5 +62,6 @@ export {
   BarChartIcon,
   BarRoundChartIcon,
   Panda1Icon,
-  AddIcon
+  AddIcon,
+  TickCircleSuccessIcon
 };
