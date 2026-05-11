@@ -6,8 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getLocalStore(key: string) {
-  const data = localStorage.getItem(key); 
   try {
+    const data = localStorage.getItem(key); 
     if(data) {
       return JSON.parse(data);
     } 

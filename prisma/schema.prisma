@@ -24,6 +24,7 @@ model User {
   birthDate   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now())
+  notebooks Notebook[]
 }
 
 model Word {
@@ -88,4 +89,30 @@ model Idiom {
   content_word_id  Int
   contentWord      ContentWord  @relation(fields: [content_word_id], references: [id], onDelete: Cascade)
   @@map("idioms")
+}
+
+model Notebook {
+  id        Int            @id @default(autoincrement())
+  userId    Int            @map("user_id")
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String         @db.VarChar(255)
+  total     Int            @default(0)
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  notebookWords NotebookWord[]
+  @@map("notebooks")
+}
+
+model NotebookWord {
+  id         Int       @id @default(autoincrement())
+  notebookId Int       @map("notebook_id")
+  notebook   Notebook  @relation(fields: [notebookId], references: [id], onDelete: Cascade)
+  word       String    @db.VarChar(255)
+  pronounce  String?   @db.VarChar(255)
+  kind       String?   @db.VarChar(255)
+  mean       String?
+  note       String?
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  @@map("notebook_words")
 }

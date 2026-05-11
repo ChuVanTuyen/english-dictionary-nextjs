@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Card } from "./ui/card";
+import { Card } from "../ui/card";
 import { Nunito } from "next/font/google";
-import { AppStoreIcon, CHplayIcon, ExtensionIcon } from "./icons";
+import { AppStoreIcon, CHplayIcon, ExtensionIcon } from "../icons";
 import Image from "next/image";
 
 const nunito = Nunito({

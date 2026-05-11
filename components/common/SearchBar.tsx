@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { MicroIcon, PencilIcon, PieceIcon, SearchIcon } from "./icons";
+import { MicroIcon, PencilIcon, PieceIcon, SearchIcon } from "../icons";
 
 interface SuggestWord {
   word: string;

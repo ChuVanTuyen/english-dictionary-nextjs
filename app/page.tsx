@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ListWordSidebar } from "@/components/home/ListWordSidebar";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from "@/components/common/SearchBar";
 import { ArrowLeftIcon, ArrowRightIcon, TipIcon } from "@/components/icons";
 
 export default function Home() {

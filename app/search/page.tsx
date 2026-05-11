@@ -4,8 +4,7 @@ import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Word } from "./type";
-import { SearchBar } from "@/components/SearchBar";
-import { BookmarkIcon, SpeakerIcon } from "@/components/icons";
+import { SearchBar } from "@/components/common/SearchBar";
 import { DetailWord } from "./(components)/DetailWord";
 
 export default function Search() {

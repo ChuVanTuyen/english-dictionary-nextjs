@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import Header from "@/components/header";
-import { Footer } from "@/components/footer";
+import StorageListener from "@/components/common/StorageListener";
+import Header from "@/components/common/header";
+import { Footer } from "@/components/common/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Toaster />
         <Footer />
+        <StorageListener />
       </body>
     </html>
   );

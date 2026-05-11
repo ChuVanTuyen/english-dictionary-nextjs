@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     if (!isMatch) {
       return NextResponse.json(
-        { message: "Invalid password" },
+        { message: "Invalid email or password" },
         { status: 401 },
       );
     }
@@ -30,15 +30,19 @@ export async function POST(req: Request) {
       { expiresIn: "1d" },
     );
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       message: "Login success",
-      data: {
-        user,
-        token
-      },
+      user
     });
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 60 * 60 * 24
+    });
+    return response;
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

@@ -4,14 +4,14 @@ import { cn, getLocalStore, setLocalStore } from "@/lib/utils";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Switch } from "./ui/switch";
+} from "../ui/dropdown-menu";
+import { Switch } from "../ui/switch";
 import { useEffect, useState } from "react";
 import {
   DictionaryIcon,
@@ -21,10 +21,11 @@ import {
   PracticeIcon,
   SettingIcon,
   VietnamFlagIcon,
-} from "./icons";
+} from "../icons";
 import Image from "next/image";
 import { useUserStore } from "@/lib/stores/userStore";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -61,6 +62,8 @@ export default function Header() {
 
     setLocalStore("darkMode", darkMode);
   }, [darkMode]);
+
+  const mounted = useMounted();
 
   return (
     <header className="container mx-auto pt-4">
@@ -123,17 +126,15 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          {user ? (
-            <div>
-              <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                  className="grayscale"
-                />
-                <AvatarFallback>VN</AvatarFallback>
-              </Avatar>
-            </div>
+          {!mounted ? null : user ? (
+            <Avatar>
+              <AvatarImage
+                src="https://github.com/shadcn.png"
+                alt="@shadcn"
+                className="grayscale"
+              />
+              <AvatarFallback>VN</AvatarFallback>
+            </Avatar>
           ) : (
             <>
               <Link href="/login" className="mr-3">

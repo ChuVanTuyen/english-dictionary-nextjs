@@ -1,6 +1,11 @@
 "use client";
 
-import { EmailIcon, InfoCircle, LockIcon, TickCircleSuccessIcon } from "@/components/icons";
+import {
+  EmailIcon,
+  InfoCircle,
+  LockIcon,
+  TickCircleSuccessIcon,
+} from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,6 +25,7 @@ import { useUserStore } from "@/lib/stores/userStore";
 import { setLocalStore } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -31,6 +37,11 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function Page() {
+  const router = useRouter();
+  const user = useUserStore((state) => state.user);
+  if (user) {
+    router.push("/");
+  }
   const setUser = useUserStore((state) => state.setUser);
 
   const {
@@ -62,16 +73,16 @@ export default function Page() {
       .then((res) => {
         toast.success("Đăng nhập thành công", {
           position: "top-right",
-          icon: <TickCircleSuccessIcon />
+          icon: <TickCircleSuccessIcon />,
         });
         setUser(res.data.user);
-        setLocalStore('inforUser', res.data.user);
-        setLocalStore('token', res.data.token);
+        setLocalStore("inforUser", res.data.user);
+        router.push('/');
       })
       .catch((err) => {
         toast.error("Tài khoản hoặc mật khẩu không chính xác", {
           position: "top-right",
-          icon: <InfoCircle className="text-(--surface-error-primary)" />
+          icon: <InfoCircle className="text-(--surface-error-primary)" />,
         });
       });
   };

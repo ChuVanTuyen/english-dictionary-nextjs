@@ -56,7 +56,7 @@ export function DetailWord({ detailWord }: { detailWord: Word }) {
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             {detailWord.synonyms.map((syn) => (
-              <Badge variant="secondary">{syn}</Badge>
+              <Badge variant="secondary" key={syn}>{syn}</Badge>
             ))}
           </div>
         </Card>

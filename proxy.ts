@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
 export function proxy(req: any) {
-  const token = req.headers.get("authorization")?.split(" ")[1];
+  const token = req.cookies.get("token")?.value;
 
   if (!token) {
+    if (req.nextUrl.pathname === "/login") {
+      return NextResponse.next();
+    }
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
@@ -17,5 +20,5 @@ export function proxy(req: any) {
 }
 
 export const config = {
-  matcher: ["/api/protected/:path*"],
+  matcher: ["/api/notebook/:path*", "/login"],
 };
